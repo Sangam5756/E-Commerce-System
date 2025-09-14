@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.shopify.core.Category;
 import com.shopify.core.Product;
+import com.shopify.exceptions.ECommerceException;
 import com.shopify.exceptions.DuplicateResourceException;
 
 public class ProductServiceImpl implements ProductService {
@@ -28,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
 
 		for (Product product : products) {
 
-			if (product.getName().equalsIgnoreCase(name) && product.getCategory() == category) {
+			if (product.getProductName().equalsIgnoreCase(name) && product.getProductCategory() == category) {
 				throw new DuplicateResourceException("Duplicate products not allowed");
 			}
 		}
@@ -45,14 +46,14 @@ public class ProductServiceImpl implements ProductService {
 
 //		after checking just add the list
 		products.add(new Product(name, validCategory, price, stock));
-
+		
 		return "Product Added Successfully";
 
 	}
 
 	@Override
 	public void DisplayProduct() {
-		
+
 		for (Product pd : products) {
 			System.out.println(pd);
 		}
@@ -62,10 +63,23 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void DisplayProductWithStockStatus() {
 		for (Product pd : products) {
-			String status = (pd.getStock() > 0) ? "In Stock" : "Out of Stock";
+			String status = (pd.getProductStock() > 0) ? "In Stock" : "Out of Stock";
 			System.out.println(pd + " | Status: " + status);
 
 		}
+	}
+
+	@Override
+	public Product findProductById(int productId) throws ECommerceException {
+
+		int index = products.indexOf(new Product(productId));
+		
+		if (index == -1) {
+			throw new ECommerceException("Product not found ");
+		}
+		Product prd = products.get(index);
+
+		return prd;
 	}
 
 //	get products

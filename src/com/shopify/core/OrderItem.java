@@ -16,10 +16,6 @@ public class OrderItem {
 		return product;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 	public int getQuantity() {
 		return quantity;
 	}
@@ -30,6 +26,6 @@ public class OrderItem {
 
 	@Override
 	public String toString() {
-		return "OrderItem [product=" + product + ", quantity=" + quantity + "]";
+		return "OrderItem [" + product.toString() + ", quantity=" + quantity + "]";
 	}
 }

@@ -9,12 +9,13 @@ public class Order {
 	private int orderId;
 	private Customer customer;
 	private List<OrderItem> orderItems;
-	public static int IncrementOrderId = 111;
+	public static int IncrementOrderId = 100;
 
-	public Order(Customer customer, List<OrderItem> orderItems) {
+	public Order(Customer customer, OrderItem OrderItem) {
 		this.orderId = ++IncrementOrderId;
 		this.customer = customer;
 		this.orderItems = new ArrayList<>();
+		this.orderItems.add(OrderItem);
 	}
 
 	public int getOrderId() {
@@ -25,25 +26,14 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
 	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<OrderItem> orderItems) {
-		this.orderItems = orderItems;
-	}
-
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", customer=" + customer + ", orderItems=" + orderItems + "]";
+		return "Order [orderId=" + orderId + ", customerId=" + (customer != null ? customer.getId() : "null")
+				+ ", orderItems=" + orderItems + "]";
 	}
 
 }

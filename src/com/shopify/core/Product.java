@@ -19,6 +19,7 @@ public class Product {
 		this.price = price;
 		this.stock = stock;
 	}
+	
 
 	public Product(int productId) {
 		this.productId = productId;
@@ -28,37 +29,39 @@ public class Product {
 		return productId;
 	}
 
-	public String getName() {
+	public String getProductName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setProductName(String name) {
 		this.name = name;
 	}
 
-	public Category getCategory() {
+	public Category getProductCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setProductCategory(Category category) {
 		this.category = category;
 	}
 
-	public double getPrice() {
+	public double getProductPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setProductPrice(double price) {
 		this.price = price;
 	}
 
-	public int getStock() {
+	public int getProductStock() {
 		return stock;
 	}
 
-	public void setStock(int stock) {
+	public void setProductStock(int stock) {
 		this.stock = stock;
 	}
+	
+	
 
 	@Override
 	public boolean equals(Object obj) {

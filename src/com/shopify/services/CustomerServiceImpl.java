@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shopify.core.Customer;
-import com.shopify.exceptions.BaseException;
+import com.shopify.core.Order;
+import com.shopify.exceptions.ECommerceException;
 import com.shopify.exceptions.DuplicateResourceException;
+import com.shopify.exceptions.InvalidCredentialsException;
+import com.shopify.exceptions.ResourceNotFoundException;
 
 public class CustomerServiceImpl implements CustomerService {
 
@@ -15,11 +18,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	public CustomerServiceImpl() {
 		this.customers = new ArrayList<>();
+		this.customers.add(new Customer("Sangam", "sangam@gmail.com", "123"));
 	}
 
 	@Override
 	public String registerCustomer(String name, String email, String password)
-			throws DuplicateResourceException, BaseException {
+			throws DuplicateResourceException, ECommerceException {
 		boolean isExist = emailExist(email, customers);
 		if (isExist)
 			throw new DuplicateResourceException("Email is already present please login");
@@ -33,11 +37,11 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public String loginCustomer(String email, String password) throws BaseException {
+	public Customer loginCustomer(String email, String password) throws ECommerceException {
 
 		boolean isExist = emailExist(email, customers);
 		if (!isExist)
-			throw new BaseException("Account doesn't exist");
+			throw new ResourceNotFoundException("Account doesn't exist");
 
 		/*
 		 * then find the user then check for password in list we first need the index of
@@ -49,13 +53,13 @@ public class CustomerServiceImpl implements CustomerService {
 
 		Customer cst = customers.get(index);
 		if (!cst.getPassword().equals(password)) {
-			throw new BaseException("Invalid Credentials");
+			throw new InvalidCredentialsException("Invalid Credentials");
 		}
 
 //		then now this line execute when upper all things are working fine
 
 		System.out.println(cst);
-		return "userLoginSuccessfull";
+		return cst;
 	}
 
 	@Override
@@ -64,6 +68,20 @@ public class CustomerServiceImpl implements CustomerService {
 		for (Customer cust : customers) {
 			System.out.println(cust);
 		}
+
+	}
+
+	@Override
+	public void AddCustomerOrder(Customer customer, Order order) {
+
+		customer.addOrder(order);
+
+	}
+
+	public List<Order> DisplayAllOrdersOfCustomer(Customer cst) {
+
+
+		return cst.getOrder();
 
 	}
 

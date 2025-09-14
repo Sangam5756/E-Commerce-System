@@ -7,7 +7,7 @@ public class Customer {
 //		id, name, email, password, list of orders.
 	private int id;
 	private String name, email, password;
-	private List<Order> order;
+	private List<Order> orders;
 	public static int incrementId;
 
 	static {
@@ -20,7 +20,7 @@ public class Customer {
 		this.email = email;
 		this.password = password;
 //		as customer is new so initialize empty list
-		this.order = new ArrayList<>();
+		this.orders = new ArrayList<>();
 	}
 
 	@Override
@@ -38,8 +38,16 @@ public class Customer {
 		this.email = email;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 
 	public void setName(String name) {
@@ -54,25 +62,21 @@ public class Customer {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	public List<Order> getOrder() {
-		return order;
+		return orders;
 	}
 
-	public void setOrder(List<Order> order) {
-		this.order = order;
+	public void addOrder(Order order) {
+		this.orders.add(order);
 	}
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ",order=" + order + "]";
+		return "Customer id=" + id + ", name=" + name + ", email=" + email;
 	}
 
 }
