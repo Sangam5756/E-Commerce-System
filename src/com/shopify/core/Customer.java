@@ -23,6 +23,21 @@ public class Customer {
 		this.order = new ArrayList<>();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+// check the object is instance of Customer to safely downcasting
+		if (obj instanceof Customer) {
+//			downcast to Customer
+			Customer cust = (Customer) obj;
+			return this.email.equals(cust.email);
+		}
+		return false;
+	}
+
+	public Customer(String email) {
+		this.email = email;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -55,11 +70,9 @@ public class Customer {
 		this.order = order;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ",order="
-				+ order + "]";
+		return "Customer [id=" + id + ", name=" + name + ", email=" + email + ",order=" + order + "]";
 	}
 
 }

@@ -2,6 +2,8 @@ package com.shopify.main;
 
 import java.util.Scanner;
 
+import com.shopify.services.CustomerService;
+import com.shopify.services.CustomerServiceImpl;
 import com.shopify.services.ProductService;
 import com.shopify.services.ProductServiceImpl;
 
@@ -14,11 +16,12 @@ public class Test {
 
 //			here will create product service
 			ProductService productService = new ProductServiceImpl();
+			CustomerService customerService = new CustomerServiceImpl();
 
 			do {
 
 				System.out.println("1.Add Product" + "\n2.Display Products" + "\n3.Show All Products "
-						+ "\n4.Show Product With Stock Status");
+						+ "\n4.Show Product With Stock Status" + "\n5.Register Customer" + "\n6.Display All Customer");
 				System.out.println("Enter the choice ");
 				ch = sc.nextInt();
 
@@ -47,7 +50,22 @@ public class Test {
 					case 4: {
 						System.out.println("\n-----------------REGISTER CUSTOMER-----------------\n");
 
+						System.out.println(customerService.registerCustomer("Sangam", "sangam@gmail.com", "123"));
 						System.out.println("\n-----------------_____________________-----------------\n");
+						break;
+					}
+
+					case 5: {
+						System.out.println("\n-----------------DisplayAllCustomer-----------------\n");
+						customerService.displayAllCustomer();
+						System.out.println("\n-----------------_____________________-----------------\n");
+						break;
+					}
+					case 6: {
+						System.out.println("\n-----------------LoginCustomer-----------------\n");
+						customerService.loginCustomer("sangm@gmail.com", "123");
+						System.out.println("\n-----------------_____________________-----------------\n");
+						break;
 					}
 
 					default:
